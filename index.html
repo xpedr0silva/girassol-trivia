@@ -198,79 +198,52 @@
 
     <script>
         // Array com as perguntas, alternativas incorretas e a explicação.
-        // Baseado no experimento de germinação do girassol anão e na monografia "Manejo de Produção do Girassol Anão de Jardim" (UFRPE/UAST, 2019).
+        // Baseado na monografia "Manejo de Produção do Girassol Anão de Jardim" (UFRPE/UAST, 2019) e no guia de cultivo da Agristar/Topseed Garden.
         const questions = [
             {
-                question: "1. Como começou o plantio das sementes de girassol anão?",
+                question: "1. Quantas horas de sol direto por dia o girassol anão precisa?",
                 options: [
-                    { text: "Direto em um vaso grande, sem nenhum cuidado antes.", correct: false },
-                    { text: "Em um recipiente com algodão úmido, até a semente germinar (quebrar a casca).", correct: true },
-                    { text: "Dentro de um copo com água, totalmente submersas.", correct: false }
-                ],
-                explanation: "As sementes foram colocadas sobre algodão úmido. Assim é possível acompanhar a germinação de perto antes de passar a planta para o vaso."
-            },
-            {
-                question: "2. Quanto tempo as sementes levaram para germinar no algodão?",
-                options: [
-                    { text: "Cerca de 3 a 4 dias.", correct: true },
-                    { text: "Cerca de 30 dias.", correct: false },
-                    { text: "Algumas horas, no mesmo dia.", correct: false }
-                ],
-                explanation: "O girassol tem germinação rápida: em cerca de 3 a 4 dias a casca da semente quebrou e a raiz começou a aparecer."
-            },
-            {
-                question: "3. Quando as plantinhas foram passadas para o vaso?",
-                options: [
-                    { text: "Antes de germinar, ainda como semente seca.", correct: false },
-                    { text: "Só depois de um mês, quando já estavam grandes.", correct: false },
-                    { text: "Após a germinação, no 5º dia.", correct: true }
-                ],
-                explanation: "Depois que as sementes germinaram, as plantinhas foram transferidas para o vaso, onde continuaram a se desenvolver."
-            },
-            {
-                question: "4. Qual foi a quantidade de água usada no algodão, no início?",
-                options: [
-                    { text: "Cerca de 5 ml por recipiente com 3 sementes, aplicados com uma seringa.", correct: true },
-                    { text: "Um balde de água, para deixar o algodão encharcado.", correct: false },
-                    { text: "Nenhuma água, o algodão deve ficar seco.", correct: false }
-                ],
-                explanation: "Uma pequena quantidade de água, aplicada com seringa, mantém o algodão úmido sem afogar a semente."
-            },
-            {
-                question: "5. Como deve ser a rega depois que a planta vai para o vaso?",
-                options: [
-                    { text: "Manter o solo bem úmido, mas não encharcado.", correct: true },
-                    { text: "Deixar a terra secar completamente entre as regas.", correct: false },
-                    { text: "Encharcar o vaso todos os dias para a raiz crescer mais.", correct: false }
-                ],
-                explanation: "No vaso foram usados no máximo cerca de 200 ml por rega. Água demais pode apodrecer a raiz e a falta dela prejudica a planta."
-            },
-            {
-                question: "6. Qual vaso e qual terra foram usados?",
-                options: [
-                    { text: "Vaso de 2 litros com terra adubada.", correct: true },
-                    { text: "Vaso de 50 litros com areia pura.", correct: false },
-                    { text: "Vaso de 2 litros com cascalho e sem terra.", correct: false }
-                ],
-                explanation: "Um vaso de 2 litros com terra adubada já oferece espaço e nutrientes para a planta brotar e se desenvolver."
-            },
-            {
-                question: "7. Quantas horas de sol por dia o girassol precisa para florescer bem?",
-                options: [
-                    { text: "De 6 a 8 horas de luz solar por dia.", correct: true },
+                    { text: "Pelo menos 6 horas por dia.", correct: true },
                     { text: "Cerca de 30 minutos por dia.", correct: false },
                     { text: "Nenhuma, ele cresce melhor na sombra.", correct: false }
                 ],
-                explanation: "Neste experimento a planta recebeu cerca de 2 horas de sol e conseguiu brotar, mas para florescer o ideal é de 6 a 8 horas de sol por dia."
+                explanation: "O girassol é a 'flor do sol': precisa de luz solar direta, por pelo menos 6 horas diárias, para crescer saudável e florescer."
             },
             {
-                question: "8. Qual é o melhor horário para regar o girassol?",
+                question: "2. Como deve ser a rega do girassol anão?",
                 options: [
-                    { text: "Bem cedinho ou no pôr do sol.", correct: true },
-                    { text: "Ao meio-dia, com o sol mais forte.", correct: false },
-                    { text: "Só durante a madrugada, no escuro total.", correct: false }
+                    { text: "Manter o solo úmido, mas sem encharcar.", correct: true },
+                    { text: "Deixar a terra secar totalmente entre as regas.", correct: false },
+                    { text: "Encharcar o vaso todos os dias.", correct: false }
                 ],
-                explanation: "Nesses horários o sol é mais fraco, então não há risco de queimar as folhas que estão crescendo."
+                explanation: "Água demais pode apodrecer as raízes e a falta dela prejudica a planta. Por isso o vaso deve ter furos no fundo para escoar o excesso. Em dias quentes, regue com mais frequência."
+            },
+            {
+                question: "3. A que profundidade devo plantar a semente?",
+                options: [
+                    { text: "Cerca de 1 cm de profundidade.", correct: true },
+                    { text: "Cerca de 20 cm de profundidade.", correct: false },
+                    { text: "Em cima da terra, sem cobrir.", correct: false }
+                ],
+                explanation: "A semente deve ficar bem rasa, em torno de 1 cm de profundidade, para conseguir romper a terra e brotar."
+            },
+            {
+                question: "4. Em quanto tempo o girassol anão floresce, em média?",
+                options: [
+                    { text: "Cerca de 60 dias após o plantio.", correct: true },
+                    { text: "Cerca de 5 dias após o plantio.", correct: false },
+                    { text: "Cerca de 1 ano após o plantio.", correct: false }
+                ],
+                explanation: "O girassol anão tem ciclo curto: as flores aparecem em cerca de 60 dias, o que o torna ótimo para quem quer resultado rápido."
+            },
+            {
+                question: "5. Qual é uma curiosidade sobre as flores do girassol?",
+                options: [
+                    { text: "Elas afastam todos os insetos do jardim.", correct: false },
+                    { text: "Elas atraem polinizadores, como abelhas e borboletas.", correct: true },
+                    { text: "Elas só abrem durante a noite.", correct: false }
+                ],
+                explanation: "As flores amarelas e vistosas atraem abelhas e borboletas, que ajudam na polinização e deixam o jardim mais vivo."
             }
         ];
 
