@@ -198,61 +198,79 @@
 
     <script>
         // Array com as perguntas, alternativas incorretas e a explicação.
-        // Baseado na monografia "Manejo de Produção do Girassol Anão de Jardim" (UFRPE/UAST, 2019).
+        // Baseado no experimento de germinação do girassol anão e na monografia "Manejo de Produção do Girassol Anão de Jardim" (UFRPE/UAST, 2019).
         const questions = [
             {
-                question: "1. Qual tipo de recipiente pode ser usado para plantar o girassol anão?",
+                question: "1. Como começou o plantio das sementes de girassol anão?",
                 options: [
-                    { text: "Um copinho descartável de 50 ml, pois a planta é pequena.", correct: false },
-                    { text: "Vasos de polietileno com cerca de 6 litros.", correct: true },
-                    { text: "Uma bandeja rasa de 2 cm de profundidade.", correct: false }
+                    { text: "Direto em um vaso grande, sem nenhum cuidado antes.", correct: false },
+                    { text: "Em um recipiente com algodão úmido, até a semente germinar (quebrar a casca).", correct: true },
+                    { text: "Dentro de um copo com água, totalmente submersas.", correct: false }
                 ],
-                explanation: "No experimento, as sementes foram semeadas em vasos de polietileno de 6 litros, que dão espaço suficiente para as raízes."
+                explanation: "As sementes foram colocadas sobre algodão úmido. Assim é possível acompanhar a germinação de perto antes de passar a planta para o vaso."
             },
             {
-                question: "2. Qual mistura de substrato foi usada nos vasos?",
+                question: "2. Quanto tempo as sementes levaram para germinar no algodão?",
                 options: [
-                    { text: "Solo e húmus, na proporção de 4 para 2.", correct: true },
-                    { text: "Apenas areia de construção.", correct: false },
-                    { text: "Somente pedrinhas e cascalho.", correct: false }
+                    { text: "Cerca de 3 a 4 dias.", correct: true },
+                    { text: "Cerca de 30 dias.", correct: false },
+                    { text: "Algumas horas, no mesmo dia.", correct: false }
                 ],
-                explanation: "Os vasos foram preenchidos com solo e húmus (4:2), uma mistura rica em nutrientes para o desenvolvimento da planta."
+                explanation: "O girassol tem germinação rápida: em cerca de 3 a 4 dias a casca da semente quebrou e a raiz começou a aparecer."
             },
             {
-                question: "3. Em que condição de luz o girassol deve ser cultivado?",
+                question: "3. Quando as plantinhas foram passadas para o vaso?",
                 options: [
-                    { text: "Em sombra total, dentro de casa.", correct: false },
-                    { text: "Apenas com luz de lâmpada, à noite.", correct: false },
-                    { text: "A sol pleno.", correct: true }
+                    { text: "Antes de germinar, ainda como semente seca.", correct: false },
+                    { text: "Só depois de um mês, quando já estavam grandes.", correct: false },
+                    { text: "Após a germinação, no 5º dia.", correct: true }
                 ],
-                explanation: "O girassol é a 'flor do sol': ele deve ser cultivado a pleno sol, pois a flor sempre se direciona para o sol."
+                explanation: "Depois que as sementes germinaram, as plantinhas foram transferidas para o vaso, onde continuaram a se desenvolver."
             },
             {
-                question: "4. Como foi feita a irrigação dos vasos?",
+                question: "4. Qual foi a quantidade de água usada no algodão, no início?",
                 options: [
-                    { text: "Uma vez por mês, com bastante água.", correct: false },
-                    { text: "Aproximadamente 1 litro de água por vaso, todos os dias.", correct: true },
-                    { text: "Nunca, apenas com a chuva.", correct: false }
+                    { text: "Cerca de 5 ml por recipiente com 3 sementes, aplicados com uma seringa.", correct: true },
+                    { text: "Um balde de água, para deixar o algodão encharcado.", correct: false },
+                    { text: "Nenhuma água, o algodão deve ficar seco.", correct: false }
                 ],
-                explanation: "A irrigação foi de 1 litro de água por vaso, aplicada diariamente, de acordo com a capacidade de campo do substrato."
+                explanation: "Uma pequena quantidade de água, aplicada com seringa, mantém o algodão úmido sem afogar a semente."
             },
             {
-                question: "5. Em quanto tempo, em média, o girassol ornamental começa a florescer?",
+                question: "5. Como deve ser a rega depois que a planta vai para o vaso?",
                 options: [
-                    { text: "Cerca de 60 dias.", correct: true },
-                    { text: "Cerca de 5 dias.", correct: false },
-                    { text: "Cerca de 1 ano.", correct: false }
+                    { text: "Manter o solo bem úmido, mas não encharcado.", correct: true },
+                    { text: "Deixar a terra secar completamente entre as regas.", correct: false },
+                    { text: "Encharcar o vaso todos os dias para a raiz crescer mais.", correct: false }
                 ],
-                explanation: "O girassol ornamental tem ciclo curto: o florescimento ocorre em torno de 60 dias, o que é uma vantagem para o produtor."
+                explanation: "No vaso foram usados no máximo cerca de 200 ml por rega. Água demais pode apodrecer a raiz e a falta dela prejudica a planta."
             },
             {
-                question: "6. O que acontece ao retirar o capítulo principal (a flor central) da planta?",
+                question: "6. Qual vaso e qual terra foram usados?",
                 options: [
-                    { text: "A planta morre imediatamente.", correct: false },
-                    { text: "Nada muda na planta.", correct: false },
-                    { text: "A planta é estimulada a desenvolver brotações laterais.", correct: true }
+                    { text: "Vaso de 2 litros com terra adubada.", correct: true },
+                    { text: "Vaso de 50 litros com areia pura.", correct: false },
+                    { text: "Vaso de 2 litros com cascalho e sem terra.", correct: false }
                 ],
-                explanation: "Essa técnica é chamada de pinch: ao quebrar a dominância apical, a planta passa a desenvolver brotações laterais. No estudo, usar também a giberelina aumentou ainda mais o número de brotações."
+                explanation: "Um vaso de 2 litros com terra adubada já oferece espaço e nutrientes para a planta brotar e se desenvolver."
+            },
+            {
+                question: "7. Quantas horas de sol por dia o girassol precisa para florescer bem?",
+                options: [
+                    { text: "De 6 a 8 horas de luz solar por dia.", correct: true },
+                    { text: "Cerca de 30 minutos por dia.", correct: false },
+                    { text: "Nenhuma, ele cresce melhor na sombra.", correct: false }
+                ],
+                explanation: "Neste experimento a planta recebeu cerca de 2 horas de sol e conseguiu brotar, mas para florescer o ideal é de 6 a 8 horas de sol por dia."
+            },
+            {
+                question: "8. Qual é o melhor horário para regar o girassol?",
+                options: [
+                    { text: "Bem cedinho ou no pôr do sol.", correct: true },
+                    { text: "Ao meio-dia, com o sol mais forte.", correct: false },
+                    { text: "Só durante a madrugada, no escuro total.", correct: false }
+                ],
+                explanation: "Nesses horários o sol é mais fraco, então não há risco de queimar as folhas que estão crescendo."
             }
         ];
 
