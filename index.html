@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trívia do Girassol Anão 🌻</title>
+    <style>
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #E8F5E9;
+            --hover-green: #C8E6C9;
+            --earth-brown: #8B4513;
+            --text-dark: #333333;
+            --bg-color: #F4F7F4;
+            --correct: #4CAF50;
+            --incorrect: #F44336;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary-green);
+        }
+
+        .quiz-content {
+            padding: 30px;
+        }
+
+        h1 {
+            color: var(--primary-green);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--earth-brown);
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background-color: var(--light-green);
+            border: 2px solid var(--primary-green);
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: var(--text-dark);
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background-color: var(--hover-green);
+            transform: translateY(-2px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .option-btn.correct {
+            background-color: var(--correct);
+            color: white;
+            border-color: var(--correct);
+        }
+
+        .option-btn.wrong {
+            background-color: var(--incorrect);
+            color: white;
+            border-color: var(--incorrect);
+        }
+
+        .feedback-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .feedback-box.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .feedback-box.error {
+            background-color: #FFEBEE;
+            border-left: 4px solid var(--incorrect);
+            color: #C62828;
+        }
+
+        .feedback-box.success {
+            background-color: #E8F5E9;
+            border-left: 4px solid var(--correct);
+            color: #2E7D32;
+        }
+
+        .next-btn, .restart-btn {
+            background-color: var(--earth-brown);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            display: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .next-btn:hover, .restart-btn:hover {
+            background-color: #6b3410;
+        }
+
+        .results {
+            text-align: center;
+            display: none;
+        }
+
+        .results h2 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Substitua 'capa-girassol.jpg' pelo caminho da sua imagem, se renomear -->
+        <img src="capa-girassol.jpg" alt="Girassol Anão de Jardim" class="header-image">
+
+        <div class="quiz-content">
+            <h1>Guia de Plantio: Girassol Anão 🌻</h1>
+
+            <div id="quiz-section">
+                <div id="progress" style="text-align: right; color: #666; font-size: 0.9rem; margin-bottom: 10px;"></div>
+                <div class="question-text" id="question">Carregando pergunta...</div>
+                <div class="options-container" id="options">
+                    <!-- Botões gerados via JS -->
+                </div>
+
+                <div class="feedback-box" id="feedback"></div>
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">Próxima Pergunta</button>
+            </div>
+
+            <div id="results-section" class="results">
+                <h2>Trívia Concluída! 🌻</h2>
+                <p id="score-text"></p>
+                <button class="restart-btn" id="restart-btn" style="display: block;" onclick="restartQuiz()">Tentar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array com as perguntas, alternativas incorretas e a explicação.
+        // Baseado na monografia "Manejo de Produção do Girassol Anão de Jardim" (UFRPE/UAST, 2019).
+        const questions = [
+            {
+                question: "1. Qual tipo de recipiente pode ser usado para plantar o girassol anão?",
+                options: [
+                    { text: "Um copinho descartável de 50 ml, pois a planta é pequena.", correct: false },
+                    { text: "Vasos de polietileno com cerca de 6 litros.", correct: true },
+                    { text: "Uma bandeja rasa de 2 cm de profundidade.", correct: false }
+                ],
+                explanation: "No experimento, as sementes foram semeadas em vasos de polietileno de 6 litros, que dão espaço suficiente para as raízes."
+            },
+            {
+                question: "2. Qual mistura de substrato foi usada nos vasos?",
+                options: [
+                    { text: "Solo e húmus, na proporção de 4 para 2.", correct: true },
+                    { text: "Apenas areia de construção.", correct: false },
+                    { text: "Somente pedrinhas e cascalho.", correct: false }
+                ],
+                explanation: "Os vasos foram preenchidos com solo e húmus (4:2), uma mistura rica em nutrientes para o desenvolvimento da planta."
+            },
+            {
+                question: "3. Em que condição de luz o girassol deve ser cultivado?",
+                options: [
+                    { text: "Em sombra total, dentro de casa.", correct: false },
+                    { text: "Apenas com luz de lâmpada, à noite.", correct: false },
+                    { text: "A sol pleno.", correct: true }
+                ],
+                explanation: "O girassol é a 'flor do sol': ele deve ser cultivado a pleno sol, pois a flor sempre se direciona para o sol."
+            },
+            {
+                question: "4. Como foi feita a irrigação dos vasos?",
+                options: [
+                    { text: "Uma vez por mês, com bastante água.", correct: false },
+                    { text: "Aproximadamente 1 litro de água por vaso, todos os dias.", correct: true },
+                    { text: "Nunca, apenas com a chuva.", correct: false }
+                ],
+                explanation: "A irrigação foi de 1 litro de água por vaso, aplicada diariamente, de acordo com a capacidade de campo do substrato."
+            },
+            {
+                question: "5. Em quanto tempo, em média, o girassol ornamental começa a florescer?",
+                options: [
+                    { text: "Cerca de 60 dias.", correct: true },
+                    { text: "Cerca de 5 dias.", correct: false },
+                    { text: "Cerca de 1 ano.", correct: false }
+                ],
+                explanation: "O girassol ornamental tem ciclo curto: o florescimento ocorre em torno de 60 dias, o que é uma vantagem para o produtor."
+            },
+            {
+                question: "6. O que acontece ao retirar o capítulo principal (a flor central) da planta?",
+                options: [
+                    { text: "A planta morre imediatamente.", correct: false },
+                    { text: "Nada muda na planta.", correct: false },
+                    { text: "A planta é estimulada a desenvolver brotações laterais.", correct: true }
+                ],
+                explanation: "Essa técnica é chamada de pinch: ao quebrar a dominância apical, a planta passa a desenvolver brotações laterais. No estudo, usar também a giberelina aumentou ainda mais o número de brotações."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const feedbackEl = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const progressEl = document.getElementById('progress');
+        const quizSection = document.getElementById('quiz-section');
+        const resultsSection = document.getElementById('results-section');
+        const scoreText = document.getElementById('score-text');
+
+        // Função para embaralhar as alternativas
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuestion() {
+            resetState();
+            const currentQuestion = questions[currentQuestionIndex];
+
+            progressEl.innerText = `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
+            questionEl.innerText = currentQuestion.question;
+
+            // Criar uma cópia das opções para embaralhar, assim a certa não fica sempre no mesmo lugar
+            let shuffledOptions = [...currentQuestion.options];
+            shuffleArray(shuffledOptions);
+
+            shuffledOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.innerText = option.text;
+                button.classList.add('option-btn');
+                button.addEventListener('click', () => selectAnswer(button, option, currentQuestion.explanation));
+                optionsEl.appendChild(button);
+            });
+        }
+
+        function selectAnswer(selectedButton, option, explanation) {
+            const isCorrect = option.correct;
+
+            // Desativa todos os botões após a escolha
+            Array.from(optionsEl.children).forEach(btn => {
+                btn.disabled = true;
+            });
+
+            feedbackEl.classList.remove('success', 'error');
+            feedbackEl.classList.add('show');
+
+            if (isCorrect) {
+                selectedButton.classList.add('correct');
+                score++;
+                feedbackEl.classList.add('success');
+                feedbackEl.innerHTML = `<strong>Correto! 🌻</strong><br>${explanation}`;
+            } else {
+                selectedButton.classList.add('wrong');
+                feedbackEl.classList.add('error');
+                feedbackEl.innerHTML = `<strong>Incorreto! 🍂</strong><br>${explanation}`;
+
+                // Destaca a correta
+                Array.from(optionsEl.children).forEach(btn => {
+                    const optionData = questions[currentQuestionIndex].options.find(o => o.text === btn.innerText);
+                    if (optionData && optionData.correct) {
+                        btn.style.border = "2px solid #4CAF50";
+                        btn.style.color = "#4CAF50";
+                    }
+                });
+            }
+
+            nextBtn.style.display = 'block';
+        }
+
+        function resetState() {
+            nextBtn.style.display = 'none';
+            feedbackEl.classList.remove('show');
+            while (optionsEl.firstChild) {
+                optionsEl.removeChild(optionsEl.firstChild);
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizSection.style.display = 'none';
+            resultsSection.style.display = 'block';
+            scoreText.innerHTML = `Você acertou <strong>${score}</strong> de <strong>${questions.length}</strong> perguntas!<br><br>Seguindo as dicas desta trívia, você estará pronto para cultivar um girassol anão lindo.`;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizSection.style.display = 'block';
+            resultsSection.style.display = 'none';
+            loadQuestion();
+        }
+
+        // Inicia o Quiz
+        loadQuestion();
+    </script>
+</body>
+</html>
